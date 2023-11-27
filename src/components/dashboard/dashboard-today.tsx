@@ -1,3 +1,8 @@
+'use client'
+
+import { uid } from 'uid';
+
+// Types ----------------------------------->
 type DashboardTodayProps = {
    forecast : hourWeatherList 
 }
@@ -11,17 +16,19 @@ type hourWeatherList = {
 export default function DashboardToday({ forecast } : DashboardTodayProps) {
     // JSX ----------------------------------->
     return (
-        <div className="p-4 rounded-lg bg-zinc-600 w-auto flex-rol">            
-            <span className="text-lg font-bold">Today's Forecast</span>
-            <div className="overflow-x-scroll gap-x-6 p-6 justify-center items-center">
+        <div className="p-2 rounded-lg bg-zinc-900 flex-rol">            
+            <span className="text-lg font-bold">Today{"'"}s Forecast</span>
+            <div className="flex text-2xl font-bold w-fit gap-x-10 p-6 justify-center items-center">
                 {
                     forecast.map((item) => {
                         return (
-                            <div className="rounded-lg bg-zinc-400 w-min h-48">
-                                <ul className="w-auto p-2 gap-y-12">
-                                    <li>{item.hour}</li>
-                                    <li>define image</li>
-                                    <li>{item.temp_c ? item.temp_f : item.temp_c}</li>                                    
+                            <div
+                                key={uid()} 
+                                className="rounded-lg p-2 bg-zinc-700 w-fit h-48 text-center">
+                                <ul className="w-auto p-2">
+                                    <li className='mb-2'>{item.hour.substring(10, item.hour.length)}</li>
+                                    <li className='mb-2'>define image</li>
+                                    <li className='text-4xl'>{item.temp_c === undefined ? item.temp_f : item.temp_c}º</li>                                    
                                 </ul>
                             </div>
                         )

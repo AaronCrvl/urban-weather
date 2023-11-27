@@ -5,33 +5,27 @@ import Image from 'next/image'
 export default function SideNav() {
     // JSX ----------------------------------->
     return (
-        <div className="w-auto h-screen bg-lime-400">
-            <ul className="flex-col space-y-14 p-6 divide-y text-4xl font-bold">
-                <li className='grow'>                    
-                    {/* <Image 
-                        alt=""
-                        src="/assets/icons/iweather.png"
-                        layout="fill"
-                        objectFit="cover"
-                    /> */}
-                    <span>Weather</span>
+        <div className="w-auto h-screen bg-zinc-700">
+            <ul className="flex-col space-y-14 p-6 text-2xl font-bold text-center justify-center items-center">
+                <li className='mb-24 text-9xl'>🌇</li>             
+                <li className={document.location.pathname.includes('cities') ? 'opacity-100' : 'opacity-25 invert transition ease-in-out delay-150 hover:opacity-100 hover:cursor-pointer hover:scale-110'}>
+                    <Image 
+                        className='ml-auto mr-auto'
+                        alt='weather-icon'
+                        src={require('../assets/general-icons/iweather.png')}
+                        width={48}
+                        height={48}
+                   />
+                <span>Cities</span>
                 </li>
-                <li>
-                    {/* <Image 
-                        alt=""
-                        src="/assets/icons/iweather.png"
-                        layout="fill"
-                        objectFit="cover"
-                    /> */}
-                    <span>Cities</span>
-                </li>
-                <li>                    
-                    {/* <Image 
-                        alt=""
-                        src="/assets/icons/iweather.png"
-                        layout="fill"
-                        objectFit="cover"
-                    /> */}
+                <li className={document.location.pathname.includes('settings') ? 'opacity-100' : 'opacity-25 invert transition ease-in-out delay-150 hover:opacity-100 hover:cursor-pointer hover:scale-110'}>
+                    <Image 
+                        className='ml-auto mr-auto'
+                        alt='weather-icon'
+                        src={require('../assets/general-icons/iweather.png')}
+                        width={48}
+                        height={48}
+                   />
                     <span>Settings</span>
                 </li>
             </ul>            
