@@ -1,9 +1,9 @@
 'use client'
 import { uid } from 'uid';
-import { DefineIcon } from '../../analytics/image-handler';
+import { DefineWeatherIcon } from '@/analytics/image-handler';
 import { ForecastApiResponse } from '@/types/APIResponseObjects/ForecastApiResponse';
 
-// Types ----------------------------------->
+// Types ------------------------------------>
 type DashboardTodayProps = {
    forecast : ForecastApiResponse
 }
@@ -23,7 +23,7 @@ export default function DashboardToday({ forecast } : DashboardTodayProps) {
                             >
                                 <ul className="w-auto p-2">
                                     <li className='mb-2'>{item.time}</li>
-                                    <li className='mb-2'>{item.temp_c ? DefineIcon(item.temp_f) : DefineIcon(item.temp_c)}</li>
+                                    <li className='mb-2'>{item.temp_c ? DefineWeatherIcon(item.temp_f) : DefineWeatherIcon(item.temp_c)}</li>
                                     <li className='text-4xl'>{item.temp_c === undefined ? item.temp_f : item.temp_c}º</li>                                    
                                 </ul>
                             </div>

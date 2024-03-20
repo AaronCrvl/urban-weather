@@ -9,16 +9,14 @@ import { Fragment, useState, useEffect } from "react"
 import { GetForecast } from "@/APIs/ws-forecast"
 import { GetCurrent } from "@/APIs/ws-current"
 import LoadingIcon from "@/components/loading-icon"
-import { useRouter } from "next/router"
+import { useSearchParams } from "next/navigation"
 import { ForecastApiResponse } from "@/types/APIResponseObjects/ForecastApiResponse"
 import { CurrentApiResponse } from "@/types/APIResponseObjects/CurrentApiResponse"
 
-let { routeSlice } = useRouter().query
-routeSlice = routeSlice?.slice(0,7) // /search/
+export default function SearchResult() {            
 
-export default function SearchResult() {         
     // Params ----------------------------------->
-    const textSearched = routeSlice      
+    const textSearched = useSearchParams().get('location')!  
     
     // Hooks ----------------------------------->    
     const [current, setCurrent] = useState<CurrentApiResponse>()
@@ -31,7 +29,7 @@ export default function SearchResult() {
         }
 
         setDataFilled(current !== undefined && forecast !== undefined  && location !== undefined)
-    }, [current, forecast, location])        
+    }, [current, forecast, textSearched])        
 
     // Jsx ----------------------------------->
     return (

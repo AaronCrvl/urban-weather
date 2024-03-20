@@ -1,6 +1,6 @@
-import SearchResult from "@/components/serach-results/main";
+import SearchResult from "@/components/search-results"
 
-export default function SearchPage() {
+export default function SearchPage() {                
     return (
         <div className="p-1">
             <SearchResult />

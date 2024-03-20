@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Current } from "@/types/Objects/Current"
 import { Location } from "@/types/Objects/Location"
 import { GetCountryFlagCode } from "../../analytics/image-handler"
+
 type DashboardHeaderProps = {
     current : Current,
     location : Location
@@ -20,7 +21,7 @@ export default function DashboardHeader({current, location} : DashboardHeaderPro
         <div className="text-4xl">            
             <div className="flex gap-48">
                 <div>
-                    <img loading="lazy" src={GetCountryFlagCode(location.country)} />
+                    <Image alt="Country Flag" loading="lazy" src={GetCountryFlagCode(location.country)} />
                     <span className="flex font-bold">{location.name + "-" + location.region}</span>            
                     <span className="text-6xl font-bold text-left">{current.temp_c}º</span>    
                 </div>

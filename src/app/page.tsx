@@ -1,21 +1,21 @@
-'use client'
+"use client"
 import { useState, useRef, Fragment } from "react";
-import { useRouter } from "next/router";
-import { Search } from "@/types/Search";
+import Router from 'next/router';
+import { SearchApiResponse } from "@/types/APIResponseObjects/SearchApiResponse";
 import { GetSearchResults } from "@/APIs/ws-search";
 import PopUpMessage from "@/components/pop-up-message";
+import { uid } from 'uid';
 
-export default function Home() {  
-  // Hooks ----------------------------------->  
-  const router = useRouter()
-  const [searchedResults, setSearchedResults] = useState<Search[]>([])
+export default function Home() {    
+  // Hooks ----------------------------------->    
+  const [searchedResults, setSearchedResults] = useState<SearchApiResponse | null>()
   const [popUpTrigger, setPopUpTrigger] = useState<Boolean>(false)
   const inputText = useRef(null)
   
   // Functions ----------------------------------->
   function handleSearch () {    
-    if(inputText.current === '' || inputText.current === null) {
-      setSearchedResults([])
+    if(inputText.current === null || inputText.current === '') {
+      setSearchedResults(null)
       return
     }
 
@@ -29,7 +29,10 @@ export default function Home() {
 
   function redirectOnSelection(locationId : number) {       
     // Dynamic Redirection
-    router.push('/search/[text]', `/search/${locationId.toString()}`)   
+    Router.push({
+      pathname: '/search',
+      query: { location: locationId },
+    })   
   }
 
   // Jsx ----------------------------------->
@@ -52,13 +55,14 @@ export default function Home() {
             />                        
 
             {/* Search Results */}
-            {searchedResults.length <= 0 ?
+            {(searchedResults !== null && searchedResults !== undefined &&  searchedResults!.search.length <= 0) ?
               <Fragment />
               :
               <ul>
-                {searchedResults
+                {searchedResults?.search
                   .map(item => 
                     <li 
+                      key={uid()}
                       className="bg-gray-200 hover:bg-gray-400"
                       onClick={()=> redirectOnSelection(item.id)}
                     >

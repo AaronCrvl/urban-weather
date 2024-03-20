@@ -1,6 +1,6 @@
 // Onnly Handle Image Selection
-export function DefineWeatherIcon (num : number) {            
-    
+export function DefineWeatherIcon (num : number) : string {            
+    return ''
 }
 
 export function GetCountryFlagCode(countryName : string) : string {
