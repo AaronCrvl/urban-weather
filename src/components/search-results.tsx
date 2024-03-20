@@ -10,47 +10,52 @@ import { GetForecast } from "@/APIs/ws-forecast"
 import { GetCurrent } from "@/APIs/ws-current"
 import LoadingIcon from "@/components/loading-icon"
 import { useSearchParams } from "next/navigation"
-import { ForecastApiResponse } from "@/types/APIResponseObjects/ForecastApiResponse"
-import { CurrentApiResponse } from "@/types/APIResponseObjects/CurrentApiResponse"
+import { Current } from "@/types/Objects/Current"
+import { Location } from "@/types/Objects/Location"
+import { Forecast } from "@/types/Objects/Forecast"
+import SearchBar from "./search-bar"
 
 export default function SearchResult() {            
-
     // Params ----------------------------------->
-    const textSearched = useSearchParams().get('location')!  
+    const textSearched = useSearchParams().get('locationURL')!  
     
     // Hooks ----------------------------------->    
-    const [current, setCurrent] = useState<CurrentApiResponse>()
-    const [forecast, setForecast] = useState<ForecastApiResponse>()    
-    const [dataFilled, setDataFilled] = useState<boolean>(false)
-    useEffect(()=> {
-        if(!forecast || !current || !location) {
-            GetCurrent(textSearched!.toString(), 'pt').then((data : CurrentApiResponse) => setCurrent(data))
-            GetForecast(textSearched!.toString()).then((data : ForecastApiResponse) => setForecast(data))                    
-        }
+    const [currentApiResponse, setCurrent] = useState<{
+        location : Location,
+        current : Current,
+    }>()
+    const [forecastApiResponse, setForecast] = useState<{
+        location : Location,
+        current : Current,
+        forecast : Forecast
+    }>()    
 
-        setDataFilled(current !== undefined && forecast !== undefined  && location !== undefined)
-    }, [current, forecast, textSearched])        
+    const [isDataFilled, setDataFilled] = useState<boolean>(false)
+    useEffect(()=> {
+        if(!forecastApiResponse || !currentApiResponse) {
+            GetCurrent(textSearched!.toString(), 'pt').then((data) => setCurrent(data))
+            GetForecast(textSearched!.toString()).then((data) => setForecast(data))                    
+        }
+        
+        setDataFilled(currentApiResponse !== undefined && forecastApiResponse !== undefined)        
+    }, [currentApiResponse, forecastApiResponse, textSearched])        
 
     // Jsx ----------------------------------->
     return (
-        <div className="w-full h-auto">
+        <div className="w-auto h-auto">
             <div className="flex gap-x-2">
                 <SideNav />
-                <div>                                    
+                <div className="w-full">                                    
                     <div className="flex h-fit w-full gap-x-2 p-4 text-2xl">                
-                        <input 
-                            type="text" 
-                            placeholder="Search for a location" 
-                            className="rounded-full p-8 w-full h-4 bg-gray-700"
-                        />                               
+                        <SearchBar />                              
                     </div>  
-                    {!dataFilled && <LoadingIcon />} 
-                    {dataFilled &&
+                    {!isDataFilled && <LoadingIcon />} 
+                    {isDataFilled &&
                         <DashboardRoot>
                             <Fragment> 
-                                <DashboardHeader current={current?.current!} location={current?.location!}/>
-                                <DashboardToday forecast={forecast!}/>
-                                <DashboardExtraInfo current={current?.current!} />
+                                <DashboardHeader current={currentApiResponse?.current!} location={currentApiResponse?.location!}/>
+                                <DashboardToday data={forecastApiResponse!}/>
+                                <DashboardExtraInfo current={currentApiResponse?.current!} />
                                 <DashboardWeek />                                                        
                             </Fragment>
                         </DashboardRoot>

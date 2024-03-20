@@ -21,8 +21,8 @@ export default function DashboardHeader({current, location} : DashboardHeaderPro
         <div className="text-4xl">            
             <div className="flex gap-48">
                 <div>
-                    <Image alt="Country Flag" loading="lazy" src={GetCountryFlagCode(location.country)} />
-                    <span className="flex font-bold">{location.name + "-" + location.region}</span>            
+                    {/* <Image alt="Country Flag" loading="lazy" width={15} height={15} src={GetCountryFlagCode(location.country)} />*/}
+                    <span className="flex font-bold">{location.name + "-" + location.region}</span>             
                     <span className="text-6xl font-bold text-left">{current.temp_c}º</span>    
                 </div>
                 <Image alt="weather-icon" src={icon} width={260} height={260}/>            

@@ -1,8 +1,9 @@
 import { useState } from "react"
+import { Fragment } from "react"
 
 export default function PopUpMessage(info : string, seconds : number) {            
     // Hooks ----------------------------------->
-    const [enabled, setEnabled] = useState<Boolean>(false)
+    const [enabled, setEnabled] = useState<Boolean>(true)
 
     // Functions ----------------------------------->
     setTimeout(() => {
@@ -11,12 +12,13 @@ export default function PopUpMessage(info : string, seconds : number) {
 
     // Jsx ----------------------------------->
     return (        
-        <div
-            className="float-right rounded-lg p-10 align-center text-center font-bold text-white border-2-yellow gap-8"
-            style={{display: enabled ? 'block' : 'none'}}
-        >
-            <span>i</span>
-            <span>{info}</span>                
-        </div>        
+        <Fragment>
+            {
+                enabled && 
+                <div className="float-right rounded-lg p-10 align-center text-center font-bold text-white border-2-yellow gap-8">            
+                    <span>{info}</span>                
+                </div>  
+            }            
+        </Fragment>      
     )
 }

@@ -1,8 +1,14 @@
-import { ForecastApiResponse } from "@/types/APIResponseObjects/ForecastApiResponse";
+import { Location } from "@/types/Objects/Location";
+import { Current } from "@/types/Objects/Current";
+import { Forecast } from "@/types/Objects/Forecast";
 
-export function GetForecast(userSearch : string, days : number = 7, lang = '') : Promise<ForecastApiResponse> {
+export function GetForecast(userSearch : string, days : number = 7, lang = '') : Promise<{
+    location : Location,
+    current : Current,
+    forecast : Forecast
+}> {
     return new Promise((resolve, reject) => {        
-        fetch(`https://api.weatherapi.com/v1/current.json?q=${userSearch}${lang === '' ? '' : '&lang=' + lang}&days=${days}&key=${process.env.WEATHER_API_KEY}`, {
+        fetch(`https://api.weatherapi.com/v1/forecast.json?q=${userSearch}${lang === '' ? '' : '&lang=' + lang}&days=${days}&key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
