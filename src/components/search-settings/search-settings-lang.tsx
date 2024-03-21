@@ -1,5 +1,6 @@
 'use client'
 
+import { uid } from "uid";
 import { useState, useEffect } from "react";
 import useLanguage from "@/hooks/useLanguage";
 
@@ -30,7 +31,8 @@ export default function SearchSettingsLang() {
                         {
                             langs.map(lang => {
                                 return(
-                                    <li 
+                                    <li
+                                        key={uid()} 
                                         className="hover:bg-gray-600"
                                         onClick={()=> handleLanguageSelection(lang)}
                                     >

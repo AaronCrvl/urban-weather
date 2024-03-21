@@ -1,5 +1,6 @@
 'use client'
 
+import { uid } from "uid";
 import { useState, useEffect } from "react";
 import useLanguage from "@/hooks/useLanguage";
 
@@ -30,6 +31,7 @@ export default function SearchSettingsMeasurementScale() {
                             scales.map(scale => {
                                 return(
                                     <li 
+                                        key={uid()}
                                         className="hover:bg-gray-600"
                                         onClick={()=> handleLanguageSelection(scale)}
                                     >
