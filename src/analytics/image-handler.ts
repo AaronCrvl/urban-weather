@@ -1,6 +1,37 @@
-// Onnly Handle Image Selection
-export function DefineWeatherIcon (num : number) : string {            
-    return ''
+import { WeatherAnalytics } from "./forecast-analytics";
+import { Current } from "@/types/Objects/Current";
+import { Location } from "@/types/Objects/Location";
+import { Forecast } from "@/types/Objects/Forecast";
+
+//! Only Handle Image File Selection
+export function GetWeatherIcon (weatherData : {
+    location : Location,
+    current : Current,
+    forecast : Forecast
+}) : string {            
+    const res = WeatherAnalytics(weatherData)        
+    switch(res.mainWeatherState.weather ) {
+        case 'sunny':
+            return '../assets/weather-icons/sunny.png'                      
+        case 'rainy':
+            return '../assets/weather-icons/rainy.png'        
+        case 'windy':
+            break;    
+        case 'snowy':
+            return '../assets/weather-icons/snowy.png' 
+        case 'cloudy':
+            return '../assets/weather-icons/cloudy.png'     
+        case 'stormy':
+            break;
+        case 'foggy':
+            break;
+        case 'humid':
+            break;
+        default : 
+            return '../assets/weather-icons/sunny.png' 
+    }    
+
+    return '../assets/weather-icons/sunny.png' 
 }
 
 export function GetCountryFlagCode(countryName : string) : string {
@@ -16,7 +47,7 @@ export function GetCountryFlagCode(countryName : string) : string {
     if(countryName.includes('Japan')) return 'https://flagsapi.com/JP/flat/64.png'
     if(countryName.includes('Nigeria')) return 'https://flagsapi.com/NG/flat/64.png'
     if(countryName.includes('Mexico')) return 'https://flagsapi.com/MX/flat/64.png'       
-    if(countryName === 'United States') return 'https://flagsapi.com/US/flat/64.png' // !_Some other countries also have united states in their name, check solution later
+    if(countryName === 'United States') return 'https://flagsapi.com/US/flat/64.png' // !_Some countries also have united states in their name, check for a solution later
     if(countryName.includes('Romania')) return 'https://flagsapi.com/RO/flat/64.png'
     if(countryName.includes('Singapore')) return 'https://flagsapi.com/SG/flat/64.png'        
     return ''

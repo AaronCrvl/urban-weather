@@ -1,7 +1,7 @@
 'use client'
 import { uid } from 'uid';
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from "react"
+import { Fragment, useRef, useState } from "react"
 import { Search } from "@/types/Objects/Search"
 import { GetSearchResults } from "@/APIs/ws-search";
 
@@ -13,8 +13,11 @@ export default function SearchBar() {
 
     // Functions ----------------------------------->
     function handleSearch () {        
-        if(inputText.current === null || inputText.current === '')         
-        return  
+        if(inputText.current === null)         
+            return  
+
+        if(inputText.current.value === '')
+            setSearchedResults(undefined)
 
         if(inputText.current.value.length < 4)
         return
@@ -49,17 +52,17 @@ export default function SearchBar() {
             </div>                     
 
             {/* Search Results */}
-            {(searchedResults !== null && searchedResults !== undefined && searchedResults!.length <= 0) ?
-            <span className="text-white-8xl">No results</span>
+            {(searchedResults === null || searchedResults === undefined || searchedResults!.length <= 0) ?
+            <Fragment />
             :
-            <ul className="mt-2 cursor-pointer p-2 w-fit bg-gray-300 rounded-lg">
+            <ul className="float mt-2 cursor-pointer p-2 w-auto bg-gray-500 rounded-lg">
                 {searchedResults?.map(item => 
                     <li 
                         key={uid()}
-                        className="float p-2 hover:bg-gray-400"
+                        className="w-full p-2 hover:bg-gray-400"
                         onClick={()=> redirectOnSelection(item.url)}
                     >
-                        {`${item.name + ', ' + item.region + ', ' + item.country}`}
+                        <span>{`${item.name + ', ' + item.region + ', ' + item.country}`}</span>
                     </li>
                     )
                 }

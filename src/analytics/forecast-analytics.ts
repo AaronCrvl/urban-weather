@@ -1,51 +1,72 @@
-import { ForecastApiResponse } from "@/types/APIResponseObjects/ForecastApiResponse";
+import { Current } from "@/types/Objects/Current";
+import { Forecast } from "@/types/Objects/Forecast";
 import { WeatherType } from "@/types/eWeatherTypes";
 
-export function WeatherAnalytics(data : ForecastApiResponse) : WeatherType {
-    let weather : WeatherType = {
-        mainWeatherState : {
-            weather : 'default',
-            relevance : 0
-        },
-        secondaryWeatherState : {
-            weather : 'default',
-            relevance : 0
-        },
-    }    
+export function WeatherAnalytics(data : {    
+    current : Current,
+    forecast : Forecast
+}) : WeatherType {
 
-    // Sunny
-    if(isSunny(data.forecast.forecastday, data.current)) {        
-        if(weather.mainWeatherState.weather === 'default') {
-            weather.mainWeatherState.weather = 'sunny'
-            weather.mainWeatherState.relevance = rainyDay(data.forecast.forecastday) ? 5 : 10 
-        }       
-    }  
+    try {
+        let weather : WeatherType = {
+            mainWeatherState : {
+                weather : 'default',
+                relevance : 0
+            },
+            secondaryWeatherState : {
+                weather : 'default',
+                relevance : 0
+            },
+        }    
 
-    // Rainy
-    if(isRainy(data.forecast.forecastday, data.current)) {
-        if(rainyDay(data.forecast.forecastday)) {
+        // Sunny
+        if(isSunny(data.forecast.forecastday, data.current)) {        
             if(weather.mainWeatherState.weather === 'default') {
-                weather.mainWeatherState.weather = 'rainy'
-                weather.mainWeatherState.relevance = 10 
-            }
-            else if(weather.secondaryWeatherState.weather === 'default') {            
-                weather.mainWeatherState.weather = 'rainy'
-                weather.mainWeatherState.relevance = 10 
-            } 
-        }       
-    }  
+                weather.mainWeatherState.weather = 'sunny'
+                weather.mainWeatherState.relevance = rainyDay(data.forecast.forecastday) ? 5 : 10 
+            }       
+        }  
 
-    // Quick Check
-    if(weather.mainWeatherState.weather !== 'default' && weather.secondaryWeatherState.weather !== 'default') return weather
+        // Rainy
+        if(isRainy(data.forecast.forecastday, data.current)) {
+            if(rainyDay(data.forecast.forecastday)) {
+                if(weather.mainWeatherState.weather === 'default') {
+                    weather.mainWeatherState.weather = 'rainy'
+                    weather.mainWeatherState.relevance = 10 
+                }
+                else if(weather.secondaryWeatherState.weather === 'default') {            
+                    weather.mainWeatherState.weather = 'rainy'
+                    weather.mainWeatherState.relevance = 10 
+                } 
+            }       
+        }  
 
-    // Windy
-    // Snowy
-    // Cloudy
-    // Stormy
-    // Foggy
-    // Humid
+        // Quick Check
+        if(weather.mainWeatherState.weather !== 'default' && weather.secondaryWeatherState.weather !== 'default') return weather
 
-    return weather    
+        // Windy
+        // Snowy
+        // Cloudy
+        // Stormy
+        // Foggy
+        // Humid
+
+        return weather   
+    } 
+    catch (err)
+    {
+        console.log(`Error on Weather Analytics: ${err}`)
+        return {
+            mainWeatherState : {
+                weather : 'sunny',
+                relevance : 0
+            },
+            secondaryWeatherState : {
+                weather : 'sunny',
+                relevance : 0
+            },
+        }    
+    }       
 }
 
 // Current Time Check -------------------------------------------------->
@@ -56,7 +77,7 @@ function isSunny(forecastday : any, current : any) : boolean {
     if(current.totalprecip_mm >= 20) return false
 
     // Forecast Average Check
-    if(forecastday.astro.is_sun_up) return false
+    if(forecastday.astro && forecastday.astro.is_sun_up) return false
     if(forecastday.day.avgtemp_c < 25) return false    
     
     return false        
@@ -74,6 +95,8 @@ function isRainy(forecastday : any, current : any) : boolean {
 
     return false
 }
+
+//.....
 
 // During The Day Check -------------------------------------------------->
 function rainyDay(forecastday : any) { 

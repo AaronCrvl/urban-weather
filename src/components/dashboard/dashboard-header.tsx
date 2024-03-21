@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react"
-import { DefineWeatherIcon } from "../../analytics/image-handler"
+import { GetWeatherIcon} from "../../analytics/image-handler"
 import Image from "next/image"
 import { Current } from "@/types/Objects/Current"
 import { Location } from "@/types/Objects/Location"
@@ -13,8 +13,8 @@ type DashboardHeaderProps = {
 
 export default function DashboardHeader({current, location} : DashboardHeaderProps) {
     // Hooks ----------------------------------->
-    const [icon, setIcon] = useState<string>(require('../../assets/weather-icons/sunny.png'))
-    useEffect(()=> {if (icon === undefined && current) DefineWeatherIcon(current.temp_c!)}, [icon, current])    
+    const [icon, setIcon] = useState<string>('https:' + current.condition.icon)
+    // useEffect(()=> {if (icon === undefined && current) GetWeatherIcon(current.temp_c!)}, [icon, current])    
 
     // Jsx ----------------------------------->
     return (
@@ -25,7 +25,7 @@ export default function DashboardHeader({current, location} : DashboardHeaderPro
                     <span className="flex font-bold">{location.name + "-" + location.region}</span>             
                     <span className="text-6xl font-bold text-left">{current.temp_c}º</span>    
                 </div>
-                <Image alt="weather-icon" src={icon} width={260} height={260}/>            
+                <img alt="weather-icon" src={icon} width={260} height={260}/>            
             </div>
         </div>
     )

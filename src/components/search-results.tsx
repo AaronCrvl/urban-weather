@@ -3,6 +3,7 @@ import DashboardRoot from "@/components/dashboard/dashboard-root"
 import DashboardToday from "@/components/dashboard/dashboard-today"
 import DashboardExtraInfo from "@/components/dashboard/dashboard-extra-info"
 import DashboardHeader from "@/components/dashboard/dashboard-header"
+import DashboardAstro from "./dashboard/dashboard-astro"
 import DashboardWeek from "@/components/dashboard/dashboard-weeek"
 import SideNav from "@/components/side-nav"
 import { Fragment, useState, useEffect } from "react"
@@ -43,19 +44,19 @@ export default function SearchResult() {
     // Jsx ----------------------------------->
     return (
         <div className="w-auto h-auto">
-            <div className="flex gap-x-2">
+            <div className="flex">
                 <SideNav />
-                <div className="w-full">                                    
-                    <div className="flex h-fit w-full gap-x-2 p-4 text-2xl">                
-                        <SearchBar />                              
-                    </div>  
+                <div className="w-full">                                                        
                     {!isDataFilled && <LoadingIcon />} 
                     {isDataFilled &&
                         <DashboardRoot>
                             <Fragment> 
                                 <DashboardHeader current={currentApiResponse?.current!} location={currentApiResponse?.location!}/>
                                 <DashboardToday data={forecastApiResponse!}/>
-                                <DashboardExtraInfo current={currentApiResponse?.current!} />
+                                <div className="flex gap-x-10">
+                                    <DashboardExtraInfo current={currentApiResponse?.current!} />
+                                    <DashboardAstro data={forecastApiResponse!}/>
+                                </div>
                                 <DashboardWeek />                                                        
                             </Fragment>
                         </DashboardRoot>

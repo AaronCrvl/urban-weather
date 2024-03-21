@@ -1,22 +1,12 @@
 'use client'
 
-import Image from "next/image"
+import { Forecast } from "@/types/Objects/Forecast"
 
-type DashboardExtraInfoProps = {
-    current : CurrentMin
-}
- 
-type CurrentMin = {
-    feelslike_c?:number,
-    feelslike_f?:number,
-    precip_in : number,
-    precip_mm : number,
-    humidity : number,
-    cloud: number,
-    wind_kph : number,
-}
-
-export default function DashboardExtraInfo({ current } : DashboardExtraInfoProps) {
+export default function DashboardAstro({data}  :  {
+    data : {        
+        forecast : Forecast
+    }
+}) {
     // Functions ----------------------------------->
     const ListItem = (caption : string, value : string | number, imageRef : string) => {
         return (
@@ -34,12 +24,12 @@ export default function DashboardExtraInfo({ current } : DashboardExtraInfoProps
     // JSX ----------------------------------->
     return (
         <div className="w-fit rounded-lg p-4 mt-6 bg-zinc-900">
-            <span className="text-2xl font-bold">🍃Air Condition</span>
+            <span className="text-2xl font-bold">🌠Astro</span>
             <div className="mt-6 grid grid-cols-2 grid-rols-2 gap-x-10 gap-y-10 font-bold">
-                {ListItem('Real Feel', `${current.feelslike_c === undefined ? current.feelslike_f : current.feelslike_c} º`, '🌎')}
-                {ListItem('Wind', `${current.wind_kph} km/h`, '🍃')}
-                {ListItem('Clouds', `${current.cloud} %`, '☁️')}
-                {ListItem('Precipitation MM', `${current.precip_mm} MM`, '⛈️')}                                
+                {ListItem('Moon Up', `${data.forecast.forecastday[0].astro.is_moon_up ? 'Yes' : 'No'}`, '🌚')}
+                {ListItem('Sun Up', `${data.forecast.forecastday[0].astro.is_sun_up ? 'Yes' : 'No'}`, '🌞')}
+                {ListItem('Sun Rise', `${data.forecast.forecastday[0].astro.sunrise ? 'Yes' : 'No'}`, '🌄')}
+                {ListItem('Moon Phase', `${data.forecast.forecastday[0].astro.moon_phase}`, '🌜')}      
             </div>
         </div>
     )
