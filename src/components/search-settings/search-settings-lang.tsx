@@ -1,14 +1,15 @@
 'use client'
 
 import { uid } from "uid";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useLanguage from "@/hooks/useLanguage";
+import { Lang } from "@/types/Lang";
 
 export default function SearchSettingsLang() {
     // Hooks ----------------------------------->
     const [lang, setLang] = useLanguage()
     const [expand, setExpand] = useState<Boolean>(false)     
-    const langs = ['pt', 'en', 'es']
+    const langs :  Lang[] = ['pt', 'en', 'es']
     
     // Functions ----------------------------------->
     function handleExpand() {

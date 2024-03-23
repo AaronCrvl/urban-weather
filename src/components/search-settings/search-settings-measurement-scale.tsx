@@ -1,21 +1,24 @@
 'use client'
 
 import { uid } from "uid";
-import { useState, useEffect } from "react";
-import useLanguage from "@/hooks/useLanguage";
+import { useState } from "react";
+import useScale from "@/hooks/useScale";
+import { MeasurementScale } from "@/types/MeasurementScale";
 
 export default function SearchSettingsMeasurementScale() {
+    const scales : MeasurementScale[] = ['Cº', 'Fº']
+
     // Hooks ----------------------------------->    
-    const [expand, setExpand] = useState<Boolean>(false)     
-    const scales = ['Cº', 'Fº']
+    const [expand, setExpand] = useState<Boolean>(false)         
+    const [scale, setScale] = useScale() 
     
     // Functions ----------------------------------->
     function handleExpand() {
         setExpand(!expand)
     }
 
-    function handleLanguageSelection(lang : string) {
-        // Custom hook action
+    function handleScaleSelection(selectedScale : MeasurementScale) {
+        setScale(selectedScale)
         setExpand(!expand)
     }
 
@@ -33,7 +36,7 @@ export default function SearchSettingsMeasurementScale() {
                                     <li 
                                         key={uid()}
                                         className="hover:bg-gray-600"
-                                        onClick={()=> handleLanguageSelection(scale)}
+                                        onClick={()=> handleScaleSelection(scale)}
                                     >
                                         {scale}
                                     </li>
@@ -49,7 +52,7 @@ export default function SearchSettingsMeasurementScale() {
                             className="rounded-lg p-2 bg-gray-500 text-white hover:bg-gray-300"
                             onClick={()=>handleExpand()}
                         >
-                            {'Selected Scale'} 
+                            {scale}
                         </span>
                     </div>
                 )
