@@ -14,19 +14,18 @@ type DashboardHeaderProps = {
 export default function DashboardHeader({current, location} : DashboardHeaderProps) {
     // Hooks ----------------------------------->
     const [icon, setIcon] = useState<string>('https:' + current.condition.icon)
-    // useEffect(()=> {if (icon === undefined && current) GetWeatherIcon(current.temp_c!)}, [icon, current])    
-
+    
     // Jsx ----------------------------------->
-    return (
-        <div className="text-4xl">            
-            <div className="flex gap-48">
-                <div>
-                    {/* <Image alt="Country Flag" loading="lazy" width={15} height={15} src={GetCountryFlagCode(location.country)} />*/}
-                    <span className="flex font-bold">{location.name + "-" + location.region}</span>             
-                    <span className="text-6xl font-bold text-left">{current.temp_c}º</span>    
-                </div>
-                <img alt="weather-icon" src={icon} width={260} height={260}/>            
+    return (                    
+        <div className="flex gap-48">
+            <div className="list-group gap-y-2 text-6xl font-bold text-left">
+                {/* <Image alt="Country Flag" loading="lazy" width={15} height={15} src={GetCountryFlagCode(location.country)} />*/}
+                <span className="flex">{location.name + "-" + location.region}</span>                             
+                <span className="flex">{current.temp_c} Cº</span>                       
+                <span className="mt-6 text-4xl flex">Feelslike: {current.feelslike_c} º</span> 
             </div>
-        </div>
+            <img alt="weather-icon" src={icon} width={260} height={260}/>    
+            <span className="text-xl font-bold text-right">Last Update: {current.last_updated}</span>          
+        </div>        
     )
 }

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { MeasurementScale } from '@/types/MeasurementScale';
 
 const browser = typeof window !== 'undefined';
-const defaultScale = (browser ? localStorage.getItem('lang') : 'pt') as MeasurementScale;
+const defaultScale = (browser ? localStorage.getItem('scale') : 'Cº') as MeasurementScale;
 const atomScale = atom<MeasurementScale>(defaultScale);
 
 export default function useScale() {

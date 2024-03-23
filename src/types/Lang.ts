@@ -1,1 +1,1 @@
-export type Lang = string | 'pt'
+export type Lang = 'es' | 'pt' | 'en'

@@ -6,10 +6,12 @@ import { useState, useEffect } from "react";
 import { Current } from "@/types/Objects/Current";
 import { Location } from "@/types/Objects/Location";
 import { Forecast } from "@/types/Objects/Forecast";
+import { useRouter } from "next/navigation";
 import useLanguage from "@/hooks/useLanguage";
 
 export default function RandomForecastPreview() {
     // Hooks ----------------------------------->
+    const router = useRouter()
     const [lang] = useLanguage()
     const [forecasts, setForecast] = useState<{
         location : Location,
@@ -35,15 +37,42 @@ export default function RandomForecastPreview() {
         })
     }, [forecasts])
     
+    // Functions ----------------------------------->
+    function handleLocationRedirection(locationURL : string) : void {
+        if(locationURL.toLowerCase().includes('vegas')) {        
+            router.push(`/search?locationURL=las-vegas-nevada-united-states-of-america`)
+            return 
+        }
+
+        if(locationURL.toLowerCase().includes('guangzhou')) {        
+            router.push(`/search?locationURL=guangzhou-guangdong-china`)
+            return 
+        }
+
+        if(locationURL.toLowerCase().includes('marseille')) {        
+            router.push(`/search?locationURL=marseille-provence-alpes-cote-dazur-france`)
+            return 
+        }
+
+        if(locationURL.toLowerCase().includes('rio')) {        
+            router.push(`/search?locationURL=rio-de-janeiro-rio-de-janeiro-brazil`)
+            return 
+        }
+    }
+
     // Jsx ----------------------------------->
     return (
-        <div className="container mt-20 opacity-70 hover:opacity-100">
+        <div className="container mt-20 opacity-70 hover:opacity-80">
             <span className="text-white-4xl font-bold">Around The World</span>
             <div className="w-fit h-auto flex mt-5 align-center items-center text-center">
-                {   forecasts &&
+                {forecasts &&
                     forecasts.map((forecast) : any => {
                         return(
-                            <div key={uid()} className="list-group w-60 cursor-pointer mr-12 bg-blue-400 rounded-lg w-48 h-80 p-2 hover:scale-110 trasition-ease-in">                                
+                            <div 
+                                key={uid()}
+                                onClick={()=> handleLocationRedirection(forecast.location.name)} 
+                                className="list-group w-60 cursor-pointer mr-12 bg-blue-400 rounded-lg w-48 h-80 p-2 hover:scale-110 trasition-ease-in"
+                            >                                
                                 <div className="mt-5 text-2xl font-semibold">{`${forecast.location.name}, ${forecast.location.country}`}</div>
                                 <div className="p-2 w-auto mt-5 text-6xl font-bold">{forecast.current.temp_c} Cº</div>                                
                                 <img 

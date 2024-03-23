@@ -12,7 +12,7 @@ export default function SearchBar() {
     const inputText = useRef<any>(null)
 
     // Functions ----------------------------------->
-    function handleSearch () {        
+    function handleSearch () : void {        
         if(inputText.current === null)         
             return  
 
@@ -32,7 +32,7 @@ export default function SearchBar() {
         )    
     }
 
-    function redirectOnSelection(locationURL : string) {       
+    function redirectOnSelection(locationURL : string) : void {       
         // Dynamic Redirection
         router.push(`/search?locationURL=${locationURL}`)    
     }

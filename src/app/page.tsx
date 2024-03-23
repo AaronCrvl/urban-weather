@@ -14,11 +14,13 @@ export default function Home() {
           <div className="w-fit mt-8 gap-x-2 text-2xl items-center justify-center">
             {/* Search */}
             <SearchBar />
+
+            {/* Search Settings */}            
             <SearchSettingsRoot>
               <SearchSettingsLang />
               <SearchSettingsMeasurementScale />
-            </SearchSettingsRoot>
-
+            </SearchSettingsRoot>            
+            
             {/* Forecasts Preview */}
             <div className="mt-36">
               <RandomForecastPreview />

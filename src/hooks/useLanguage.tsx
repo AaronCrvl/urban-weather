@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Lang } from '@/types/Lang';
 
 const navegador = typeof window !== 'undefined';
-const defaultLang = (navegador ? localStorage.getItem('lang') : 'pt-BR') as Lang;
+const defaultLang = (navegador ? localStorage.getItem('lang') : 'pt') as Lang;
 const atomLANG = atom<Lang>(defaultLang);
 
 export default function useLanguage() {

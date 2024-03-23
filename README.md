@@ -1,5 +1,5 @@
 # ☁️Urban Weather
-Simple weather app made with Next Js.
+Simple weather web app made with Next Js.
 
 ## 🧪 Stack
 

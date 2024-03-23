@@ -13,11 +13,11 @@ export default function SearchSettingsMeasurementScale() {
     const [scale, setScale] = useScale() 
     
     // Functions ----------------------------------->
-    function handleExpand() {
+    function handleExpand() : void {
         setExpand(!expand)
     }
 
-    function handleScaleSelection(selectedScale : MeasurementScale) {
+    function handleScaleSelection(selectedScale : MeasurementScale) : void {
         setScale(selectedScale)
         setExpand(!expand)
     }
@@ -35,7 +35,7 @@ export default function SearchSettingsMeasurementScale() {
                                 return(
                                     <li 
                                         key={uid()}
-                                        className="hover:bg-gray-600"
+                                        className="rounded-lg hover:bg-gray-800"
                                         onClick={()=> handleScaleSelection(scale)}
                                     >
                                         {scale}
@@ -49,7 +49,7 @@ export default function SearchSettingsMeasurementScale() {
                 (
                     <div className="mt-3">
                         <span 
-                            className="rounded-lg p-2 bg-gray-500 text-white hover:bg-gray-300"
+                            className="rounded-full p-2 bg-gray-500 text-white hover:bg-gray-600"
                             onClick={()=>handleExpand()}
                         >
                             {scale}

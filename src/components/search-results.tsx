@@ -5,6 +5,7 @@ import DashboardExtraInfo from "@/components/dashboard/dashboard-extra-info"
 import DashboardHeader from "@/components/dashboard/dashboard-header"
 import DashboardAstro from "./dashboard/dashboard-astro"
 import DashboardWeek from "@/components/dashboard/dashboard-weeek"
+import DashboardDay from "./dashboard/dashboard-day"
 import SideNav from "@/components/side-nav"
 import { Fragment, useState, useEffect } from "react"
 import { GetForecast } from "@/APIs/ws-forecast"
@@ -14,7 +15,6 @@ import { useSearchParams } from "next/navigation"
 import { Current } from "@/types/Objects/Current"
 import { Location } from "@/types/Objects/Location"
 import { Forecast } from "@/types/Objects/Forecast"
-import SearchBar from "./search-bar"
 
 export default function SearchResult() {            
     // Params ----------------------------------->
@@ -53,9 +53,10 @@ export default function SearchResult() {
                             <Fragment> 
                                 <DashboardHeader current={currentApiResponse?.current!} location={currentApiResponse?.location!}/>
                                 <DashboardToday data={forecastApiResponse!}/>
-                                <div className="flex gap-x-10">
+                                <div className="grid grid-cols-3 grid-rols-2 flex gap-x-10">
                                     <DashboardExtraInfo current={currentApiResponse?.current!} />
                                     <DashboardAstro data={forecastApiResponse!}/>
+                                    <DashboardDay data={forecastApiResponse!}/>
                                 </div>
                                 <DashboardWeek />                                                        
                             </Fragment>
