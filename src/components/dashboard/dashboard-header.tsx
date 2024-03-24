@@ -55,7 +55,7 @@ export default function DashboardHeader({current, location} : DashboardHeaderPro
 
             {/* Last Update */}
             <span 
-                className="text-xl font-bold text-right"
+                className="text-xl text-white font-bold text-right"
             >
                 Last Update: {current.last_updated}
             </span>          

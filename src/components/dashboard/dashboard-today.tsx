@@ -13,7 +13,7 @@ export default function DashboardToday({data}  :  {
 }) {          
     // Jsx ----------------------------------->
     return (
-        <div className="mt-12 p-4 w-auto h-auto rounded-lg bg-zinc-900 flex-rol">            
+        <div className="mt-12 p-4 w-auto h-auto rounded-lg bg-gray-500 flex-rol">            
             <span className="text-2xl font-bold">Today{"'"}s Forecast</span>
             <div className="mt-6 grid grid-cols-6 grid-rols-6 text-2xl font-bold gap-y-4">
                 {data &&
@@ -21,7 +21,7 @@ export default function DashboardToday({data}  :  {
                         return (
                             <div
                                 key={uid()} 
-                                className="w-64 rounded-lg p-2 bg-zinc-700 hover:bg-zinc-900 w-min h-min text-center"
+                                className="w-80 rounded-lg p-2 bg-gray-400 hover:bg-zinc-900 w-min h-min text-center"
                             >                                
                                 <div className='mb-2 text-2xl'>{item.time.substring(10, item.time.length)}</div>
                                 <img className='mr-auto ml-auto' alt="weather-icon" src={item.condition.icon}/>      

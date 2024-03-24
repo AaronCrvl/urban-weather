@@ -23,7 +23,7 @@ export default function DashboardDay({data}  :  {
 
     // JSX ----------------------------------->
     return (
-        <div className="w-fit rounded-lg p-4 mt-6 bg-zinc-900">
+        <div className="w-fit rounded-lg p-4 mt-6 bg-gray-500 hover:bg-zinc-800">
             <span className="text-2xl font-bold">💨Day</span>
             <div className="mt-6 grid grid-cols-2 grid-rols-2 gap-x-10 gap-y-10 font-bold">
                 {ListItem('Avarege Humidity', `${data.forecast.forecastday[0].day.avghumidity}`, '⛈️')}

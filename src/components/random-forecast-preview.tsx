@@ -65,7 +65,7 @@ export default function RandomForecastPreview() {
     // Jsx ----------------------------------->
     return (
         <div className="container mt-20 opacity-70 hover:opacity-80">
-            <span className="text-white-4xl font-bold">Around The World</span>
+            <span className="text-white text-4xl font-bold">Around The World</span>
             <div className="w-fit h-auto flex mt-5 align-center items-center text-center">
                 {forecasts &&
                     forecasts.map((forecast) : any => {
@@ -73,14 +73,14 @@ export default function RandomForecastPreview() {
                             <div 
                                 key={uid()}
                                 onClick={()=> handleLocationRedirection(forecast.location.name)} 
-                                className="list-group w-60 cursor-pointer mr-12 bg-blue-400 rounded-lg w-48 h-80 p-2 hover:scale-110 trasition-ease-in"
+                                className="bg-gray-400 list-group w-60 cursor-pointer mr-12 border-4 border-gray-700 rounded-lg w-48 h-80 p-2 hover:scale-110 trasition-ease-in"
                             >                                
                                 {/* Header Info */}
                                 <div className="mt-5 text-2xl font-semibold">{`${forecast.location.name}, ${forecast.location.country}`}</div>
                                 <div 
                                     className="p-2 w-auto mt-5 text-6xl font-bold"
                                 >
-                                    {scale.includes('Cº') ? `${forecast.current.temp_c} C` : `${forecast.current.temp_f} F`} º
+                                    {scale.includes('Cº') ? `${forecast.current.temp_c} C` : `${forecast.current.temp_f} F`}º
                                 </div>                                
                                 <img 
                                     className='ml-auto mr-auto'

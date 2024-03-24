@@ -25,7 +25,7 @@ export default function SearchSettingsMeasurementScale() {
     // Jsx ----------------------------------->
     return (
         <div className="items-center align-center text-center">
-            <span className="w-min">Scale</span>
+            <span className="w-min text-4xl font-bold">Scale</span>
             {
                 expand ?
                 (
@@ -35,7 +35,7 @@ export default function SearchSettingsMeasurementScale() {
                                 return(
                                     <li 
                                         key={uid()}
-                                        className="rounded-lg hover:bg-gray-800"
+                                        className="rounded-lg hover:bg-gray-800 cursor-pointer"
                                         onClick={()=> handleScaleSelection(scale)}
                                     >
                                         {scale}
@@ -47,7 +47,7 @@ export default function SearchSettingsMeasurementScale() {
                 )
                 :
                 (
-                    <div className="mt-3">
+                    <div className="mt-3 cursor-pointer">
                         <span 
                             className="rounded-full p-2 bg-gray-500 text-white hover:bg-gray-600"
                             onClick={()=>handleExpand()}

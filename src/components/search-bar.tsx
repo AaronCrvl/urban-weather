@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useRef, useState } from "react"
 import { Search } from "@/types/Objects/Search"
 import { GetSearchResults } from "@/APIs/ws-search";
+import { useSearchParams } from 'next/navigation';
 
 export default function SearchBar() {
     // Hooks ----------------------------------->
-    const router = useRouter() 
+    const searchParams = useSearchParams()
+    const router = useRouter()     
     const [searchedResults, setSearchedResults] = useState<Search[]>()
     const inputText = useRef<any>(null)
 
@@ -32,10 +34,10 @@ export default function SearchBar() {
         )    
     }
 
-    function redirectOnSelection(locationURL : string) : void {       
-        // Dynamic Redirection
-        router.push(`/search?locationURL=${locationURL}`)    
-    }
+    function redirectOnSelection(locationURL : string) {           
+        setSearchedResults(undefined)        
+        router.push(`/search?locationURL=${locationURL}`)               
+    }    
 
     // Jsx ----------------------------------->
     return (
