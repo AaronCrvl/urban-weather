@@ -9,10 +9,10 @@ export default function SideNav() {
     
     // JSX ----------------------------------->
     return (
-        <div className="w-fit h-auto bg-gray-600">
+        <div className="w-48 h-auto bg-gray-600">
             <ul className="flex-col space-y-14 text-center justify-center items-center">
                 <li 
-                    className='mt-12 mb-24 text-4xl cursor-pointer'
+                    className='p-4 mt-12 mb-24 text-4xl cursor-pointer font-bold'
                     onClick={()=> {
                         router.back()
                     }}

@@ -8,10 +8,12 @@ import { Location } from "@/types/Objects/Location";
 import { Forecast } from "@/types/Objects/Forecast";
 import { useRouter } from "next/navigation";
 import useLanguage from "@/hooks/useLanguage";
+import useScale from "@/hooks/useScale";
 
 export default function RandomForecastPreview() {
     // Hooks ----------------------------------->
     const router = useRouter()
+    const [scale] = useScale()
     const [lang] = useLanguage()
     const [forecasts, setForecast] = useState<{
         location : Location,
@@ -24,10 +26,10 @@ export default function RandomForecastPreview() {
             return    
         
         Promise.all([ 
-            GetForecast('las-vegas-nevada-united-states-of-america', 1, lang),
             GetForecast('guangzhou-guangdong-china', 1, lang),
-            GetForecast('marseille-provence-alpes-cote-dazur-france', 1, lang),
             GetForecast('rio-de-janeiro-rio-de-janeiro-brazil', 1, lang),
+            GetForecast('las-vegas-nevada-united-states-of-america', 1, lang),            
+            GetForecast('marseille-provence-alpes-cote-dazur-france', 1, lang),            
         ])
         .then(reponses => {
             setForecast(reponses)            
@@ -73,12 +75,17 @@ export default function RandomForecastPreview() {
                                 onClick={()=> handleLocationRedirection(forecast.location.name)} 
                                 className="list-group w-60 cursor-pointer mr-12 bg-blue-400 rounded-lg w-48 h-80 p-2 hover:scale-110 trasition-ease-in"
                             >                                
+                                {/* Header Info */}
                                 <div className="mt-5 text-2xl font-semibold">{`${forecast.location.name}, ${forecast.location.country}`}</div>
-                                <div className="p-2 w-auto mt-5 text-6xl font-bold">{forecast.current.temp_c} Cº</div>                                
+                                <div 
+                                    className="p-2 w-auto mt-5 text-6xl font-bold"
+                                >
+                                    {scale.includes('Cº') ? `${forecast.current.temp_c} C` : `${forecast.current.temp_f} F`} º
+                                </div>                                
                                 <img 
                                     className='ml-auto mr-auto'
                                     alt='weather-icon'                                    
-                                    src={'https:' + forecast.current.condition.icon}
+                                    src={forecast.current.condition.icon}
                                     loading="lazy"
                                     width={70}
                                     height={70}

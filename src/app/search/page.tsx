@@ -1,8 +1,10 @@
 import SearchResult from "@/components/search-results"
+import SideNav from "@/components/side-nav"
 
 export default function SearchPage() {                
     return (
-        <div className="w-full h-auto">
+        <div className="flex w-full h-auto">
+            <SideNav />
             <SearchResult />
         </div>
     )
