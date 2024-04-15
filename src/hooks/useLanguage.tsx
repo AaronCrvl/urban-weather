@@ -1,10 +1,10 @@
 import { atom, useAtom } from 'jotai';
 import { useEffect } from "react";
-import { Lang } from '@/types/Lang';
+import { Language } from '@/types/Lang';
 
 const navegador = typeof window !== 'undefined';
-const defaultLang = (navegador ? localStorage.getItem('lang') : 'en') as Lang;
-const atomLANG = atom<Lang>(defaultLang);
+const defaultLang = (navegador ? localStorage.getItem('lang') : 'en') as Language;
+const atomLANG = atom<Language>(defaultLang);
 
 export default function useLanguage() {
     const [lang, setLang] = useAtom(atomLANG);

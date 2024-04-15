@@ -1,10 +1,10 @@
 import { atom, useAtom } from 'jotai';
 import { useEffect } from "react";
-import { MeasurementScale } from '@/types/MeasurementScale';
+import { TemperatureUnit } from '@/types/TemperatureUnit';
 
 const browser = typeof window !== 'undefined';
-const defaultScale = (browser ? localStorage.getItem('scale') : 'Cº') as MeasurementScale;
-const atomScale = atom<MeasurementScale>(defaultScale);
+const defaultScale = (browser ? localStorage.getItem('scale') : 'Cº') as TemperatureUnit;
+const atomScale = atom<TemperatureUnit>(defaultScale);
 
 export default function useScale() {
     const [scale, setScale] = useAtom(atomScale);

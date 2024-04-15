@@ -1,6 +1,6 @@
 'use client'
 
-import Image from "next/image"
+import DashboardListItem from "./dashboard-list-item"
 
 type DashboardExtraInfoProps = {
     current : CurrentMin
@@ -16,30 +16,16 @@ type CurrentMin = {
     wind_kph : number,
 }
 
-export default function DashboardExtraInfo({ current } : DashboardExtraInfoProps) {
-    // Functions ----------------------------------->
-    const ListItem = (caption : string, value : string | number, imageRef : string) => {
-        return (
-            <div>
-                <div className="flex">
-                    <span className="text-4xl">{imageRef}</span>
-                    {/* <Image alt="item-icon" src={imageRef}  width={32} height={32} /> */}
-                    <span className="text-xl">{caption}</span>
-                </div>                    
-                <span className="text-4xl">{value}</span>
-            </div>
-        )
-    }
-
+export default function DashboardExtraInfo({ current } : DashboardExtraInfoProps) {   
     // JSX ----------------------------------->
     return (
-        <div className="w-fit rounded-lg p-4 mt-6 bg-gray-500 hover:bg-zinc-800">
+        <div className="w-full rounded-lg p-4 mt-6 bg-gray-500 hover:bg-zinc-800">
             <span className="text-2xl font-bold">🍃Air Condition</span>
             <div className="mt-6 grid grid-cols-2 grid-rols-2 gap-x-10 gap-y-10 font-bold">
-                {ListItem('Real Feel', `${current.feelslike_c === undefined ? current.feelslike_f : current.feelslike_c} º`, '🌎')}
-                {ListItem('Wind', `${current.wind_kph} km/h`, '🍃')}
-                {ListItem('Clouds', `${current.cloud} %`, '☁️')}
-                {ListItem('Precipitation MM', `${current.precip_mm} MM`, '⛈️')}                                
+                {DashboardListItem('Real Feel', `${current.feelslike_c === undefined ? current.feelslike_f : current.feelslike_c} º`, '🌎')}
+                {DashboardListItem('Wind', `${current.wind_kph} km/h`, '🍃')}
+                {DashboardListItem('Clouds', `${current.cloud} %`, '☁️')}
+                {DashboardListItem('Precipitation MM', `${current.precip_mm} MM`, '⛈️')}                                
             </div>
         </div>
     )

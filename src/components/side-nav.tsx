@@ -12,7 +12,7 @@ export default function SideNav() {
         <div className="w-48 h-auto bg-transparent border-2 border-white">
             <ul className="flex-col space-y-14 text-center justify-center items-center">
                 <li 
-                    className='p-4 mt-12 mb-24 text-4xl cursor-pointer font-bold'
+                    className='p-4 mt-12 mb-24 text-xl cursor-pointer font-bold'
                     onClick={()=> {
                         router.back()
                     }}

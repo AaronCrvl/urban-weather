@@ -5,6 +5,7 @@ import { Fragment, useRef, useState } from "react"
 import { Search } from "@/types/Objects/Search"
 import { GetSearchResults } from "@/APIs/ws-search";
 import { useSearchParams } from 'next/navigation';
+import useLanguage from '@/hooks/useLanguage';
 
 export default function SearchBar() {
     // Hooks ----------------------------------->
@@ -12,6 +13,7 @@ export default function SearchBar() {
     const router = useRouter()     
     const [searchedResults, setSearchedResults] = useState<Search[]>()
     const inputText = useRef<any>(null)
+    const [lang] = useLanguage()
 
     // Functions ----------------------------------->
     function handleSearch () : void {        
@@ -24,7 +26,7 @@ export default function SearchBar() {
         if(inputText.current.value.length < 4)
         return
 
-        GetSearchResults(inputText.current.value)
+        GetSearchResults(inputText.current.value, lang)
         .then(data => { 
             setSearchedResults(data)      
             })    

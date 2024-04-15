@@ -2,17 +2,26 @@ import SearchBar from "@/components/search-bar";
 import RandomForecastPreview from "@/components/random-forecast-preview";
 import SearchSettingsRoot from "@/components/search-settings/search-settings-root";
 import SearchSettingsLang from "@/components/search-settings/search-settings-lang";
-import SearchSettingsMeasurementScale from "@/components/search-settings/search-settings-measurement-scale";
+import SearchSettingsTemperatureUnit from "@/components/search-settings/search-settings-measurement-scale";
+import bg from "../assets/wave.svg"
 
 export default function Home() {      
+  // Functions ----------------------------------->
+  () => {
+    if(localStorage.getItem('lang') === null)
+      localStorage.setItem('lang', 'en')   
 
+      if(localStorage.getItem('scale') === null)
+        localStorage.setItem('scale', 'Cº')   
+  }
+  
   // Jsx ----------------------------------->
   return (
     <main className="min-h-screen w-full ml-auto mb-auto mt-auto mr-auto">    
         <div className="w-fit h-fit py-24 ml-auto mr-auto transition ease-in-out delay-150">          
           <div className="text-8xl font-extrabold ...">            
-            <span className="bg-clip-text text-transparent outline-4 bg-gradient-to-r from-blue-700 to-white">
-              Urban Weather
+            <span className="capitalize bg-clip-text drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-transparent overline bg-gradient-to-r from-blue-700 from-blue-500 to-white">
+              urban weather
             </span>
           </div>
           <div className="w-fit mt-8 gap-x-2 text-2xl items-center justify-center">
@@ -22,7 +31,7 @@ export default function Home() {
             {/* Search Settings */}            
             <SearchSettingsRoot>
               <SearchSettingsLang />
-              <SearchSettingsMeasurementScale />
+              <SearchSettingsTemperatureUnit />
             </SearchSettingsRoot>            
             
             {/* Forecasts Preview */}

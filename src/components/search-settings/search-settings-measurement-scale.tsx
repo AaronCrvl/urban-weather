@@ -3,10 +3,10 @@
 import { uid } from "uid";
 import { useState } from "react";
 import useScale from "@/hooks/useScale";
-import { MeasurementScale } from "@/types/MeasurementScale";
+import { TemperatureUnit } from "@/types/TemperatureUnit";
 
-export default function SearchSettingsMeasurementScale() {
-    const scales : MeasurementScale[] = ['Cº', 'Fº']
+export default function SearchSettingsTemperatureUnit() {
+    const scales : TemperatureUnit[] = ['Cº', 'Fº']
 
     // Hooks ----------------------------------->    
     const [expand, setExpand] = useState<Boolean>(false)         
@@ -17,15 +17,15 @@ export default function SearchSettingsMeasurementScale() {
         setExpand(!expand)
     }
 
-    function handleScaleSelection(selectedScale : MeasurementScale) : void {
+    function handleScaleSelection(selectedScale : TemperatureUnit) : void {
         setScale(selectedScale)
         setExpand(!expand)
     }
 
     // Jsx ----------------------------------->
     return (
-        <div className="items-center align-center text-center">
-            <span className="w-min text-4xl font-bold">Scale</span>
+        <div className="flex gap-x-4 items-center align-center text-center">
+            <span className="w-min text-2xl font-bold">Unit</span>
             {
                 expand ?
                 (

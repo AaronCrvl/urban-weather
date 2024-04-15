@@ -3,28 +3,28 @@
 import { uid } from "uid";
 import { useState } from "react";
 import useLanguage from "@/hooks/useLanguage";
-import { Lang } from "@/types/Lang";
+import { Language } from "@/types/Lang";
 
 export default function SearchSettingsLang() {
     // Hooks ----------------------------------->
     const [lang, setLang] = useLanguage()
     const [expand, setExpand] = useState<Boolean>(false)     
-    const langs :  Lang[] = ['pt', 'en', 'es']
+    const langs :  Language[] = ['pt', 'en', 'es']
     
     // Functions ----------------------------------->
     function handleExpand() {
         setExpand(!expand)
     }
 
-    function handleLanguageSelection(lang : Lang) {
+    function handleLanguageSelection(lang : Language) {
         setLang(lang)
         setExpand(!expand)
     }
 
     // Jsx ----------------------------------->
     return (
-        <div className="items-center align-center text-center">
-            <span className="w-min text-4xl font-bold">Language</span>
+        <div className="flex gap-x-4 items-center align-center text-center">
+            <span className="w-min text-2xl font-bold">Language</span>
             {
                 expand ?
                 (

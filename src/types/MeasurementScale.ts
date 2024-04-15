@@ -1,1 +1,0 @@
-export type MeasurementScale = 'Cº' | 'Fº'
