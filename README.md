@@ -11,4 +11,7 @@ Simple weather web app made with Next Js.
 ## 💤 Starting The App
 ``` javascript
 npm run dev
-``` 
+```
+
+## App
+![p1](https://github.com/AaronCrvl/urban-weather/assets/72924198/94751ee5-e9ef-48cc-a8e1-bd155dd3ad87)
